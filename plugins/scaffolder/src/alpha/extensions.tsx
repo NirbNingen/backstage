@@ -21,6 +21,7 @@ import {
 import {
   NavItemBlueprint,
   PageBlueprint,
+  createExtensionInput,
 } from '@backstage/frontend-plugin-api';
 import React from 'react';
 import { rootRouteRef } from '../routes';
@@ -31,6 +32,27 @@ export const scaffolderPage = PageBlueprint.make({
     defaultPath: '/create',
     loader: () =>
       import('../components/Router').then(m => compatWrapper(<m.Router />)),
+  },
+});
+
+export const selectedTemplatePage = PageBlueprint.makeWithOverrides({
+  name: 'selectedTemplatePage',
+  inputs: {
+    formFields: createExtensionInput([formFieldExtensionDataRef]),
+  },
+  factory(originalFactory, { inputs }) {
+    const formFields = inputs.formFields.map(f =>
+      f.get(formFieldExtensionDataRef),
+    );
+
+    return originalFactory({
+      routeRef: convertLegacyRouteRef(templateW),
+      defaultPath: '/create/wizard',
+      loader: () =>
+        import('../components/Router').then(
+          m => compatWrapper(<m.Router formFields={formFields} />), // WIZARD!?
+        ),
+    });
   },
 });
 

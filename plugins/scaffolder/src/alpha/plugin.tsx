@@ -26,6 +26,8 @@ import {
   selectedTemplateRouteRef,
   viewTechDocRouteRef,
 } from '../routes';
+import { scaffolderApi } from './api';
+import { scaffolderNavItem, scaffolderPage } from './extensions';
 
 export default createFrontendPlugin({
   id: 'scaffolder',
