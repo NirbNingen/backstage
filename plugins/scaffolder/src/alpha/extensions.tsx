@@ -21,10 +21,19 @@ import {
 import {
   NavItemBlueprint,
   PageBlueprint,
-  createExtensionInput,
 } from '@backstage/frontend-plugin-api';
 import React from 'react';
 import { rootRouteRef } from '../routes';
+import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
+import {
+  FormFieldBlueprint,
+  createFormField,
+} from '@backstage/plugin-scaffolder-react/alpha';
+import {
+  RepoUrlPicker,
+  RepoUrlPickerSchema,
+} from '../components/fields/RepoUrlPicker/RepoUrlPicker';
+import { repoPickerValidation } from '../components/fields/RepoUrlPicker/validation';
 
 export const scaffolderPage = PageBlueprint.make({
   params: {
@@ -35,31 +44,24 @@ export const scaffolderPage = PageBlueprint.make({
   },
 });
 
-export const selectedTemplatePage = PageBlueprint.makeWithOverrides({
-  name: 'selectedTemplatePage',
-  inputs: {
-    formFields: createExtensionInput([formFieldExtensionDataRef]),
-  },
-  factory(originalFactory, { inputs }) {
-    const formFields = inputs.formFields.map(f =>
-      f.get(formFieldExtensionDataRef),
-    );
-
-    return originalFactory({
-      routeRef: convertLegacyRouteRef(templateW),
-      defaultPath: '/create/wizard',
-      loader: () =>
-        import('../components/Router').then(
-          m => compatWrapper(<m.Router formFields={formFields} />), // WIZARD!?
-        ),
-    });
-  },
-});
-
 export const scaffolderNavItem = NavItemBlueprint.make({
   params: {
     routeRef: convertLegacyRouteRef(rootRouteRef),
     title: 'Create...',
     icon: CreateComponentIcon,
+  },
+});
+
+export const repoUrlPickerFormField = FormFieldBlueprint.make({
+  name: 'repo-url-picker',
+  params: {
+    field: createFormField({
+      component: RepoUrlPicker,
+      name: 'RepoUrlPicker',
+      validation: repoPickerValidation,
+      schema: {
+        output: z => z.string(),
+      },
+    }),
   },
 });

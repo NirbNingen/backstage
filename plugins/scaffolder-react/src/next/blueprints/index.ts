@@ -14,4 +14,8 @@
  * limitations under the License.
  */
 
-export * from './createFormField';
+export {
+  createFormField,
+  FormFieldBlueprint,
+  type FormFieldExtensionData,
+} from './FormFieldBlueprint';
