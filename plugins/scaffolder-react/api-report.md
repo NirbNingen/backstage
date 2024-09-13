@@ -101,20 +101,9 @@ export type FieldExtensionComponent<_TReturnValue, _TInputProps> = () => null;
 export interface FieldExtensionComponentProps<
   TFieldReturnValue,
   TUiOptions = {},
-> extends PropsWithChildren<
-    ScaffolderRJSFFieldProps<
-      TFieldReturnValue extends z.ZodType
-        ? z.output<TFieldReturnValue>
-        : TFieldReturnValue
-    >
-  > {
+> extends PropsWithChildren<ScaffolderRJSFFieldProps<TFieldReturnValue>> {
   // (undocumented)
-  uiSchema: FieldExtensionUiSchema<
-    TFieldReturnValue extends z.ZodType
-      ? z.output<TFieldReturnValue>
-      : TFieldReturnValue,
-    TUiOptions extends z.ZodType ? z.output<TUiOptions> : TUiOptions
-  >;
+  uiSchema: FieldExtensionUiSchema<TFieldReturnValue, TUiOptions>;
 }
 
 // @public

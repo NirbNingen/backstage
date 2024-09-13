@@ -19,7 +19,6 @@ import { JsonObject } from '@backstage/types';
 import { JSONSchema7 } from 'json-schema';
 import { UiSchema, UIOptionsType, FieldValidation } from '@rjsf/utils';
 import { ScaffolderRJSFFieldProps } from './rjsf';
-import { z } from 'zod';
 
 /**
  * Type for Field Extension Props for RJSF v5
@@ -29,19 +28,8 @@ import { z } from 'zod';
 export interface FieldExtensionComponentProps<
   TFieldReturnValue,
   TUiOptions = {},
-> extends PropsWithChildren<
-    ScaffolderRJSFFieldProps<
-      TFieldReturnValue extends z.ZodType
-        ? z.output<TFieldReturnValue>
-        : TFieldReturnValue
-    >
-  > {
-  uiSchema: FieldExtensionUiSchema<
-    TFieldReturnValue extends z.ZodType
-      ? z.output<TFieldReturnValue>
-      : TFieldReturnValue,
-    TUiOptions extends z.ZodType ? z.output<TUiOptions> : TUiOptions
-  >;
+> extends PropsWithChildren<ScaffolderRJSFFieldProps<TFieldReturnValue>> {
+  uiSchema: FieldExtensionUiSchema<TFieldReturnValue, TUiOptions>;
 }
 
 /**
