@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { z } from 'zod';
+import { z as zod } from 'zod';
 import { makeFieldSchemaFromZod } from '../utils';
 
-/**
- * @public
- */
-export const RepoUrlPickerFieldSchema = makeFieldSchemaFromZod(
-  z.string(),
+export const repoUrlPickerOutputSchema = (z: typeof zod) => z.string();
+export const repoUrlPickerUiSchema = (z: typeof zod) =>
   z.object({
     allowedHosts: z
       .array(z.string())
@@ -83,7 +80,14 @@ export const RepoUrlPickerFieldSchema = makeFieldSchemaFromZod(
       .describe(
         'If defined will request user credentials to auth against the given SCM platform',
       ),
-  }),
+  });
+
+/**
+ * @public
+ */
+export const RepoUrlPickerFieldSchema = makeFieldSchemaFromZod(
+  repoUrlPickerOutputSchema(zod),
+  repoUrlPickerUiSchema(zod),
 );
 
 /**

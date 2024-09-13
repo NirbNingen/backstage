@@ -34,6 +34,10 @@ import {
   RepoUrlPickerSchema,
 } from '../components/fields/RepoUrlPicker/RepoUrlPicker';
 import { repoPickerValidation } from '../components/fields/RepoUrlPicker/validation';
+import {
+  repoUrlPickerOutputSchema,
+  repoUrlPickerUiSchema,
+} from '../components/fields/RepoUrlPicker/schema';
 
 export const scaffolderPage = PageBlueprint.make({
   params: {
@@ -57,10 +61,11 @@ export const repoUrlPickerFormField = FormFieldBlueprint.make({
   params: {
     field: createFormField({
       component: RepoUrlPicker,
-      name: 'RepoUrlPicker',
+      fieldName: 'RepoUrlPicker',
       validation: repoPickerValidation,
       schema: {
-        output: z => z.string(),
+        output: repoUrlPickerOutputSchema,
+        uiOptions: repoUrlPickerUiSchema,
       },
     }),
   },

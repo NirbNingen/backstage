@@ -26,15 +26,22 @@ import * as z from 'zod';
 
 export type FormFieldExtensionData<
   TReturnValue extends z.ZodType = z.ZodType,
-  TUiOptions = unknown,
+  TUiOptions extends z.ZodType = z.ZodType,
 > = {
   fieldName: string;
   component: (
-    props: FieldExtensionComponentProps<z.output<TReturnValue>, TUiOptions>,
+    props: FieldExtensionComponentProps<
+      z.output<TReturnValue>,
+      z.output<TUiOptions>
+    >,
   ) => JSX.Element | null;
-  validation?: CustomFieldValidator<z.output<TReturnValue>, TUiOptions>;
+  validation?: CustomFieldValidator<
+    z.output<TReturnValue>,
+    z.output<TUiOptions>
+  >;
   schema?: {
     output: (zImpl: typeof z) => TReturnValue;
+    uiOptions: (zImpl: typeof z) => TUiOptions;
   };
 };
 
@@ -69,7 +76,7 @@ export interface FormField {
 
 export interface InternalFormField<
   TReturnValue extends z.ZodType = z.ZodType,
-  TUiOptions = unknown,
+  TUiOptions extends z.ZodType = z.ZodType,
 > extends FormField,
     FormFieldExtensionData<TReturnValue, TUiOptions> {}
 
@@ -78,11 +85,12 @@ export interface InternalFormField<
  *
  * @public
  */
-export function createFormField<TReturnValue extends z.ZodType, TProps>(
-  opts: FormFieldExtensionData<TReturnValue, TProps>,
-): FormField {
+export function createFormField<
+  TReturnValue extends z.ZodType,
+  TUiOptions extends z.ZodType,
+>(opts: FormFieldExtensionData<TReturnValue, TUiOptions>): FormField {
   return {
     $$type: '@backstage/scaffolder/FormField',
     ...opts,
-  } as InternalFormField<TReturnValue, TProps>;
+  } as InternalFormField<TReturnValue, TUiOptions>;
 }
