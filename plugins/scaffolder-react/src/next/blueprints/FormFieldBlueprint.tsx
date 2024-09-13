@@ -23,12 +23,13 @@ import {
   FieldExtensionComponentProps,
 } from '../../extensions';
 import * as z from 'zod';
+import { FieldSchema } from '../../utils';
 
 export type FormFieldExtensionData<
   TReturnValue extends z.ZodType = z.ZodType,
   TUiOptions extends z.ZodType = z.ZodType,
 > = {
-  fieldName: string;
+  name: string;
   component: (
     props: FieldExtensionComponentProps<
       z.output<TReturnValue>,
@@ -39,34 +40,24 @@ export type FormFieldExtensionData<
     z.output<TReturnValue>,
     z.output<TUiOptions>
   >;
-  schema?: {
-    output: (zImpl: typeof z) => TReturnValue;
-    uiOptions: (zImpl: typeof z) => TUiOptions;
-  };
+  schema?: FieldSchema<z.output<TReturnValue>, z.output<TUiOptions>>;
 };
 
-const formFieldExtensionDataRef =
-  createExtensionDataRef<FormFieldExtensionData>().with({
-    id: 'scaffolder.form-field',
-  });
-
-const toInternalFormField = (field: FormField): InternalFormField => {
-  if (field.$$type !== '@backstage/scaffolder/FormField') {
-    throw new Error('Field is not a FormField');
-  }
-
-  return field as InternalFormField;
-};
+const formFieldExtensionDataRef = createExtensionDataRef<
+  () => Promise<FormField>
+>().with({
+  id: 'scaffolder.form-field-loader',
+});
 
 export const FormFieldBlueprint = createExtensionBlueprint({
   kind: 'scaffolder-form-field',
   attachTo: { id: 'api:scaffolder/form-fields', input: 'formFields' },
   dataRefs: {
-    formField: formFieldExtensionDataRef,
+    formFieldLoader: formFieldExtensionDataRef,
   },
   output: [formFieldExtensionDataRef],
-  *factory(params: { field: FormField }) {
-    yield formFieldExtensionDataRef(toInternalFormField(params.field));
+  *factory(params: { field: () => Promise<FormField> }) {
+    yield formFieldExtensionDataRef(params.field);
   },
 });
 

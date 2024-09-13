@@ -44,6 +44,8 @@ import {
   actionsRouteRef,
   editRouteRef,
 } from './routes';
+import { formFieldsApi } from './alpha/api/FormFieldsApi';
+import { repoUrlPickerFormField } from './alpha/extensions';
 
 export {
   type FormProps,
@@ -109,5 +111,11 @@ export default createFrontendPlugin({
     registerComponent: registerComponentRouteRef,
     viewTechDoc: viewTechDocRouteRef,
   }),
-  extensions: [scaffolderApi, scaffolderPage, scaffolderNavItem],
+  extensions: [
+    scaffolderApi,
+    scaffolderPage,
+    scaffolderNavItem,
+    formFieldsApi,
+    repoUrlPickerFormField,
+  ],
 });

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-export {
-  createFormField,
-  FormFieldBlueprint,
-  type FormFieldExtensionData,
-  type FormField,
-  type InternalFormField,
-} from './FormFieldBlueprint';
+import { FormFieldExtensionData } from '@backstage/plugin-scaffolder-react/alpha';
+
+/**
+ * @public
+ */
+export interface ScaffolderFormFieldsApi {
+  getFormFields(): Promise<FormFieldExtensionData[]>;
+}

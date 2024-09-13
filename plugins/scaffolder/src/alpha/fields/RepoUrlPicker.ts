@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { createFormField } from '@backstage/plugin-scaffolder-react/alpha';
+import { RepoUrlPicker as Component } from '../../components/fields/RepoUrlPicker/RepoUrlPicker';
+import {
+  RepoUrlPickerFieldSchema,
+  repoPickerValidation,
+} from '../../components';
 
-import { FormFieldExtensionData } from '../blueprints';
-
-/**
- * @public
- */
-export interface ScaffolderFormFieldsApi {
-  getFormFields(): FormFieldExtensionData[];
-  addFormField(formField: FormFieldExtensionData): void;
-}
+export const RepoUrlPicker = createFormField({
+  component: Component,
+  name: 'RepoUrlPicker',
+  validation: repoPickerValidation,
+  schema: RepoUrlPickerFieldSchema,
+});

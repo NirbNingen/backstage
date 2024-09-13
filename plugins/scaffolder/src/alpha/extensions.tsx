@@ -25,19 +25,7 @@ import {
 import React from 'react';
 import { rootRouteRef } from '../routes';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
-import {
-  FormFieldBlueprint,
-  createFormField,
-} from '@backstage/plugin-scaffolder-react/alpha';
-import {
-  RepoUrlPicker,
-  RepoUrlPickerSchema,
-} from '../components/fields/RepoUrlPicker/RepoUrlPicker';
-import { repoPickerValidation } from '../components/fields/RepoUrlPicker/validation';
-import {
-  repoUrlPickerOutputSchema,
-  repoUrlPickerUiSchema,
-} from '../components/fields/RepoUrlPicker/schema';
+import { FormFieldBlueprint } from '@backstage/plugin-scaffolder-react/alpha';
 
 export const scaffolderPage = PageBlueprint.make({
   params: {
@@ -59,14 +47,6 @@ export const scaffolderNavItem = NavItemBlueprint.make({
 export const repoUrlPickerFormField = FormFieldBlueprint.make({
   name: 'repo-url-picker',
   params: {
-    field: createFormField({
-      component: RepoUrlPicker,
-      fieldName: 'RepoUrlPicker',
-      validation: repoPickerValidation,
-      schema: {
-        output: repoUrlPickerOutputSchema,
-        uiOptions: repoUrlPickerUiSchema,
-      },
-    }),
+    field: () => import('./fields/RepoUrlPicker').then(m => m.RepoUrlPicker),
   },
 });
