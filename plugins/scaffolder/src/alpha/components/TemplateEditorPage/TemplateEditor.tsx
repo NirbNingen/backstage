@@ -20,7 +20,7 @@ import type {
   LayoutOptions,
 } from '@backstage/plugin-scaffolder-react';
 import { FieldExtensionOptions } from '@backstage/plugin-scaffolder-react';
-import { TemplateDirectoryAccess } from '../../lib/filesystem';
+import { TemplateDirectoryAccess } from '../../../lib/filesystem';
 import { DirectoryEditorProvider } from './DirectoryEditorContext';
 import { TemplateEditorBrowser } from './TemplateEditorBrowser';
 import { DryRunProvider } from './DryRunContext';

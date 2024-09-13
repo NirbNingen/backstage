@@ -22,9 +22,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { WebFileSystemAccess } from '../../lib/filesystem';
+import { WebFileSystemAccess } from '../../../lib/filesystem';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 const useStyles = makeStyles(theme => ({
   introText: {

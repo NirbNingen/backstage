@@ -34,7 +34,7 @@ import { TemplateEditorForm } from './TemplateEditorForm';
 import validator from '@rjsf/validator-ajv8';
 import { FieldExtensionOptions } from '@backstage/plugin-scaffolder-react';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 /** @public */
 export type ScaffolderCustomFieldExplorerClassKey =

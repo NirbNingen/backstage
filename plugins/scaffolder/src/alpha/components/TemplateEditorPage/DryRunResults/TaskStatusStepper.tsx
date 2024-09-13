@@ -32,7 +32,7 @@ import useInterval from 'react-use/esm/useInterval';
 import humanizeDuration from 'humanize-duration';
 import classNames from 'classnames';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../../translation';
+import { scaffolderTranslationRef } from '../../../../translation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

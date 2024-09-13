@@ -50,14 +50,14 @@ import {
   scaffolderListTaskRouteRef,
   selectedTemplateRouteRef,
   viewTechDocRouteRef,
-} from '../../routes';
+} from '../../../routes';
 import { parseEntityRef, stringifyEntityRef } from '@backstage/catalog-model';
 import { TemplateGroupFilter } from '@backstage/plugin-scaffolder-react';
 import {
   TranslationFunction,
   useTranslationRef,
 } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 /**
  * @alpha

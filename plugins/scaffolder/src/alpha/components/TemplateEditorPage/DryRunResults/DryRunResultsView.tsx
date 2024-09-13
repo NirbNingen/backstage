@@ -26,11 +26,11 @@ import CodeMirror from '@uiw/react-codemirror';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDryRun } from '../DryRunContext';
 import { DryRunResultsSplitView } from './DryRunResultsSplitView';
-import { FileBrowser } from '../../../components/FileBrowser';
+import { FileBrowser } from '../../../../components/FileBrowser';
 import { TaskPageLinks } from './TaskPageLinks';
 import { TaskStatusStepper } from './TaskStatusStepper';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../../translation';
+import { scaffolderTranslationRef } from '../../../../translation';
 
 const useStyles = makeStyles({
   root: {

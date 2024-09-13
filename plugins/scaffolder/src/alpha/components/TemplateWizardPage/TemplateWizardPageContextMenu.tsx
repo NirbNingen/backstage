@@ -25,7 +25,7 @@ import Edit from '@material-ui/icons/Edit';
 import MoreVert from '@material-ui/icons/MoreVert';
 import React, { useState } from 'react';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 const useStyles = makeStyles(theme => ({
   button: {

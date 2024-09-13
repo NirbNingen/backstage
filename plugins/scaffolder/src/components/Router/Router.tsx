@@ -48,9 +48,9 @@ import {
   TemplateListPageProps,
   TemplateWizardPageProps,
 } from '@backstage/plugin-scaffolder/alpha';
-import { TemplateListPage, TemplateWizardPage } from '../../next';
+import { TemplateListPage, TemplateWizardPage } from '../../alpha/components';
 import { OngoingTask } from '../OngoingTask';
-import { TemplateEditorPage } from '../../next/TemplateEditorPage';
+import { TemplateEditorPage } from '../../alpha/components/TemplateEditorPage';
 
 /**
  * The Props for the Scaffolder Router

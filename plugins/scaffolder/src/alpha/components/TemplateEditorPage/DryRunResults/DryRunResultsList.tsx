@@ -27,9 +27,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import React from 'react';
 import { useDryRun } from '../DryRunContext';
-import { downloadBlob } from '../../../lib/download';
+import { downloadBlob } from '../../../../lib/download';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../../translation';
+import { scaffolderTranslationRef } from '../../../../translation';
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -18,7 +18,7 @@ import { Content, Header, Page } from '@backstage/core-components';
 import {
   TemplateDirectoryAccess,
   WebFileSystemAccess,
-} from '../../lib/filesystem';
+} from '../../../lib/filesystem';
 import { CustomFieldExplorer } from './CustomFieldExplorer';
 import { TemplateEditor } from './TemplateEditor';
 import { TemplateFormPreviewer } from './TemplateFormPreviewer';
@@ -35,9 +35,9 @@ import {
   actionsRouteRef,
   rootRouteRef,
   scaffolderListTaskRouteRef,
-} from '../../routes';
+} from '../../../routes';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 type Selection =
   | {

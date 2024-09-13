@@ -28,7 +28,7 @@ import {
   SecretsContextProvider,
 } from '@backstage/plugin-scaffolder-react';
 import { TemplateWizardPage } from './TemplateWizardPage';
-import { rootRouteRef } from '../../routes';
+import { rootRouteRef } from '../../../routes';
 import { ANNOTATION_EDIT_URL } from '@backstage/catalog-model';
 import { CatalogApi } from '@backstage/catalog-client';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';

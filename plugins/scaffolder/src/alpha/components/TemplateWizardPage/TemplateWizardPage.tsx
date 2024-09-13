@@ -44,9 +44,9 @@ import {
   rootRouteRef,
   scaffolderTaskRouteRef,
   selectedTemplateRouteRef,
-} from '../../routes';
+} from '../../../routes';
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { scaffolderTranslationRef } from '../../translation';
+import { scaffolderTranslationRef } from '../../../translation';
 
 import { TemplateWizardPageContextMenu } from './TemplateWizardPageContextMenu';
 

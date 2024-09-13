@@ -29,6 +29,7 @@ import {
 import { scaffolderApi } from './api';
 import { scaffolderNavItem, scaffolderPage } from './extensions';
 
+/** @alpha */
 export default createFrontendPlugin({
   id: 'scaffolder',
   routes: convertLegacyRouteRefs({
@@ -43,5 +44,11 @@ export default createFrontendPlugin({
     registerComponent: registerComponentRouteRef,
     viewTechDoc: viewTechDocRouteRef,
   }),
-  extensions: [scaffolderApi, scaffolderPage, scaffolderNavItem],
+  extensions: [
+    scaffolderApi,
+    scaffolderPage,
+    scaffolderNavItem,
+    formFieldsApi,
+    repoUrlPickerFormField,
+  ],
 });
