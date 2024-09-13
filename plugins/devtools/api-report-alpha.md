@@ -19,6 +19,19 @@ const _default: FrontendPlugin<
   },
   {},
   {
+    'api:devtools': ExtensionDefinition<{
+      kind: 'api';
+      namespace: undefined;
+      name: undefined;
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        AnyApiFactory,
+        'core.api.factory',
+        {}
+      >;
+      inputs: {};
+    }>;
     'page:devtools': ExtensionDefinition<{
       kind: 'page';
       namespace: undefined;
@@ -58,19 +71,6 @@ const _default: FrontendPlugin<
           routeRef: RouteRef<undefined>;
         },
         'core.nav-item.target',
-        {}
-      >;
-      inputs: {};
-    }>;
-    'api:devtools': ExtensionDefinition<{
-      kind: 'api';
-      namespace: undefined;
-      name: undefined;
-      config: {};
-      configInput: {};
-      output: ConfigurableExtensionDataRef<
-        AnyApiFactory,
-        'core.api.factory',
         {}
       >;
       inputs: {};

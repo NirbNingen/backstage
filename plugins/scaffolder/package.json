@@ -38,7 +38,7 @@
   "typesVersions": {
     "*": {
       "alpha": [
-        "src/alpha.tsx"
+        "./src/alpha/index.ts"
       ],
       "package.json": [
         "package.json"

@@ -20,8 +20,6 @@ export {
   type ScaffolderCustomFieldExplorerClassKey,
   type ScaffolderTemplateEditorClassKey,
   type ScaffolderTemplateFormPreviewerClassKey,
-  TemplateListPage,
-  TemplateWizardPage,
 } from './components';
 
 export { scaffolderTranslationRef } from '../translation';

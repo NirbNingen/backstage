@@ -27,7 +27,12 @@ import {
   viewTechDocRouteRef,
 } from '../routes';
 import { scaffolderApi } from './api';
-import { scaffolderNavItem, scaffolderPage } from './extensions';
+import {
+  repoUrlPickerFormField,
+  scaffolderNavItem,
+  scaffolderPage,
+} from './extensions';
+import { formFieldsApi } from './api/FormFieldsApi';
 
 /** @alpha */
 export default createFrontendPlugin({

@@ -146,6 +146,19 @@ const _default: FrontendPlugin<
     unregisterRedirect: ExternalRouteRef<undefined>;
   },
   {
+    'api:catalog': ExtensionDefinition<{
+      kind: 'api';
+      namespace: undefined;
+      name: undefined;
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        AnyApiFactory,
+        'core.api.factory',
+        {}
+      >;
+      inputs: {};
+    }>;
     'nav-item:catalog': ExtensionDefinition<{
       kind: 'nav-item';
       namespace: undefined;
@@ -159,19 +172,6 @@ const _default: FrontendPlugin<
           routeRef: RouteRef<undefined>;
         },
         'core.nav-item.target',
-        {}
-      >;
-      inputs: {};
-    }>;
-    'api:catalog': ExtensionDefinition<{
-      kind: 'api';
-      namespace: undefined;
-      name: undefined;
-      config: {};
-      configInput: {};
-      output: ConfigurableExtensionDataRef<
-        AnyApiFactory,
-        'core.api.factory',
         {}
       >;
       inputs: {};
