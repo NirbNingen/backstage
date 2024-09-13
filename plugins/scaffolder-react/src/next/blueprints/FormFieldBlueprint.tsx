@@ -13,35 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {
   createExtensionBlueprint,
   createExtensionDataRef,
 } from '@backstage/frontend-plugin-api';
-import {
-  CustomFieldValidator,
-  FieldExtensionComponentProps,
-} from '../../extensions';
-import * as z from 'zod';
-import { FieldSchema } from '../../utils';
+import { z } from 'zod';
 
-export type FormFieldExtensionData<
-  TReturnValue extends z.ZodType = z.ZodType,
-  TUiOptions extends z.ZodType = z.ZodType,
-> = {
-  name: string;
-  component: (
-    props: FieldExtensionComponentProps<
-      z.output<TReturnValue>,
-      z.output<TUiOptions>
-    >,
-  ) => JSX.Element | null;
-  validation?: CustomFieldValidator<
-    z.output<TReturnValue>,
-    z.output<TUiOptions>
-  >;
-  schema?: FieldSchema<z.output<TReturnValue>, z.output<TUiOptions>>;
-};
+import { FormField, FormFieldExtensionData, InternalFormField } from './types';
 
 const formFieldExtensionDataRef = createExtensionDataRef<
   () => Promise<FormField>
@@ -49,6 +27,10 @@ const formFieldExtensionDataRef = createExtensionDataRef<
   id: 'scaffolder.form-field-loader',
 });
 
+/**
+ * @alpha
+ * Creates extensions that are Field Extensions for the Scaffolder
+ * */
 export const FormFieldBlueprint = createExtensionBlueprint({
   kind: 'scaffolder-form-field',
   attachTo: { id: 'api:scaffolder/form-fields', input: 'formFields' },
@@ -61,20 +43,9 @@ export const FormFieldBlueprint = createExtensionBlueprint({
   },
 });
 
-export interface FormField {
-  $$type: '@backstage/scaffolder/FormField';
-}
-
-export interface InternalFormField<
-  TReturnValue extends z.ZodType = z.ZodType,
-  TUiOptions extends z.ZodType = z.ZodType,
-> extends FormField,
-    FormFieldExtensionData<TReturnValue, TUiOptions> {}
-
 /**
- * Creates extensions that are Field Extensions for the Scaffolder
- *
- * @public
+ * @alpha
+ * Used to create a form field binding with typechecking for compliance
  */
 export function createFormField<
   TReturnValue extends z.ZodType,

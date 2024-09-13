@@ -18,19 +18,6 @@ const _default: FrontendPlugin<
   },
   {},
   {
-    'api:catalog-import': ExtensionDefinition<{
-      kind: 'api';
-      namespace: undefined;
-      name: undefined;
-      config: {};
-      configInput: {};
-      output: ConfigurableExtensionDataRef<
-        AnyApiFactory,
-        'core.api.factory',
-        {}
-      >;
-      inputs: {};
-    }>;
     'page:catalog-import': ExtensionDefinition<{
       kind: 'page';
       namespace: undefined;
@@ -55,6 +42,19 @@ const _default: FrontendPlugin<
               optional: true;
             }
           >;
+      inputs: {};
+    }>;
+    'api:catalog-import': ExtensionDefinition<{
+      kind: 'api';
+      namespace: undefined;
+      name: undefined;
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        AnyApiFactory,
+        'core.api.factory',
+        {}
+      >;
       inputs: {};
     }>;
   }

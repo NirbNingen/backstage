@@ -18,7 +18,10 @@ import { z } from 'zod';
 import zodToJsonSchema from 'zod-to-json-schema';
 import { FieldSchema as FieldSchemaType } from '@backstage/plugin-scaffolder-react';
 
-/** @deprecated - import from {@link @backstage/plugin-scaffolder-react} instead */
+/**
+ * @public
+ * @deprecated - import from {@link @backstage/plugin-scaffolder-react#FieldSchema} instead
+ */
 export interface FieldSchema<T, P> extends FieldSchemaType<T, P> {}
 
 /**

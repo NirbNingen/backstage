@@ -7,8 +7,10 @@ import { AnyApiFactory } from '@backstage/frontend-plugin-api';
 import { AnyRouteRefParams } from '@backstage/frontend-plugin-api';
 import { ConfigurableExtensionDataRef } from '@backstage/frontend-plugin-api';
 import { ExtensionDefinition } from '@backstage/frontend-plugin-api';
+import { ExtensionInput } from '@backstage/frontend-plugin-api';
 import { ExternalRouteRef } from '@backstage/frontend-plugin-api';
 import { FieldExtensionOptions } from '@backstage/plugin-scaffolder-react';
+import { FormField } from '@backstage/plugin-scaffolder-react/alpha';
 import type { FormProps as FormProps_2 } from '@rjsf/core';
 import { FormProps as FormProps_3 } from '@backstage/plugin-scaffolder-react';
 import { FrontendPlugin } from '@backstage/frontend-plugin-api';
@@ -44,10 +46,7 @@ const _default: FrontendPlugin<
     }>;
   },
   {
-    'api:scaffolder': ExtensionDefinition<{
-      kind: 'api';
-      namespace: undefined;
-      name: undefined;
+    'api:scaffolder/form-fields': ExtensionDefinition<{
       config: {};
       configInput: {};
       output: ConfigurableExtensionDataRef<
@@ -55,7 +54,22 @@ const _default: FrontendPlugin<
         'core.api.factory',
         {}
       >;
-      inputs: {};
+      inputs: {
+        formFields: ExtensionInput<
+          ConfigurableExtensionDataRef<
+            () => Promise<FormField>,
+            'scaffolder.form-field-loader',
+            {}
+          >,
+          {
+            singleton: false;
+            optional: false;
+          }
+        >;
+      };
+      kind: 'api';
+      namespace: undefined;
+      name: 'form-fields';
     }>;
     'page:scaffolder': ExtensionDefinition<{
       kind: 'page';
@@ -96,6 +110,32 @@ const _default: FrontendPlugin<
           routeRef: RouteRef<undefined>;
         },
         'core.nav-item.target',
+        {}
+      >;
+      inputs: {};
+    }>;
+    'scaffolder-form-field:scaffolder/repo-url-picker': ExtensionDefinition<{
+      kind: 'scaffolder-form-field';
+      namespace: undefined;
+      name: 'repo-url-picker';
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        () => Promise<FormField>,
+        'scaffolder.form-field-loader',
+        {}
+      >;
+      inputs: {};
+    }>;
+    'api:scaffolder': ExtensionDefinition<{
+      kind: 'api';
+      namespace: undefined;
+      name: undefined;
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        AnyApiFactory,
+        'core.api.factory',
         {}
       >;
       inputs: {};

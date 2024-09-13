@@ -17,7 +17,7 @@
 import { FormFieldExtensionData } from '@backstage/plugin-scaffolder-react/alpha';
 
 /**
- * @public
+ * @alpha
  */
 export interface ScaffolderFormFieldsApi {
   getFormFields(): Promise<FormFieldExtensionData[]>;

@@ -7,9 +7,13 @@
 
 import { ApiHolder } from '@backstage/core-plugin-api';
 import { ComponentType } from 'react';
+import { ConfigurableExtensionDataRef } from '@backstage/frontend-plugin-api';
 import { CustomFieldValidator } from '@backstage/plugin-scaffolder-react';
 import { Dispatch } from 'react';
+import { ExtensionBlueprint } from '@backstage/frontend-plugin-api';
+import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react';
 import { FieldExtensionOptions } from '@backstage/plugin-scaffolder-react';
+import { FieldSchema } from '@backstage/plugin-scaffolder-react';
 import { FieldValidation } from '@rjsf/utils';
 import { FormProps } from '@backstage/plugin-scaffolder-react';
 import { IconComponent } from '@backstage/core-plugin-api';
@@ -34,6 +38,7 @@ import { TemplateParameterSchema } from '@backstage/plugin-scaffolder-react';
 import { TemplatePresentationV1beta3 } from '@backstage/plugin-scaffolder-common';
 import { UiSchema } from '@rjsf/utils';
 import { WidgetProps } from '@rjsf/utils';
+import { z } from 'zod';
 
 // @alpha (undocumented)
 export type BackstageOverrides = Overrides & {
@@ -58,6 +63,12 @@ export const createAsyncValidators: (
 export const createFieldValidation: () => FieldValidation;
 
 // @alpha
+export function createFormField<
+  TReturnValue extends z.ZodType,
+  TUiOptions extends z.ZodType,
+>(opts: FormFieldExtensionData<TReturnValue, TUiOptions>): FormField;
+
+// @alpha
 export const DefaultTemplateOutputs: (props: {
   output?: ScaffolderTaskOutput;
 }) => React_2.JSX.Element | null;
@@ -77,9 +88,66 @@ export const Form: (
 ) => React_2.JSX.Element;
 
 // @alpha (undocumented)
+export interface FormField {
+  // (undocumented)
+  $$type: '@backstage/scaffolder/FormField';
+}
+
+// @alpha
+export const FormFieldBlueprint: ExtensionBlueprint<{
+  kind: 'scaffolder-form-field';
+  namespace: undefined;
+  name: undefined;
+  params: {
+    field: () => Promise<FormField>;
+  };
+  output: ConfigurableExtensionDataRef<
+    () => Promise<FormField>,
+    'scaffolder.form-field-loader',
+    {}
+  >;
+  inputs: {};
+  config: {};
+  configInput: {};
+  dataRefs: {
+    formFieldLoader: ConfigurableExtensionDataRef<
+      () => Promise<FormField>,
+      'scaffolder.form-field-loader',
+      {}
+    >;
+  };
+}>;
+
+// @alpha (undocumented)
+export type FormFieldExtensionData<
+  TReturnValue extends z.ZodType = z.ZodType,
+  TUiOptions extends z.ZodType = z.ZodType,
+> = {
+  name: string;
+  component: (
+    props: FieldExtensionComponentProps<
+      z.output<TReturnValue>,
+      z.output<TUiOptions>
+    >,
+  ) => JSX.Element | null;
+  validation?: CustomFieldValidator<
+    z.output<TReturnValue>,
+    z.output<TUiOptions>
+  >;
+  schema?: FieldSchema<z.output<TReturnValue>, z.output<TUiOptions>>;
+};
+
+// @alpha (undocumented)
 export type FormValidation = {
   [name: string]: FieldValidation | FormValidation;
 };
+
+// @alpha (undocumented)
+export interface InternalFormField<
+  TReturnValue extends z.ZodType = z.ZodType,
+  TUiOptions extends z.ZodType = z.ZodType,
+> extends FormField,
+    FormFieldExtensionData<TReturnValue, TUiOptions> {}
 
 // @alpha
 export interface ParsedTemplateSchema {

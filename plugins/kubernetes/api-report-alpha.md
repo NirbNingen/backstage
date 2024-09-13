@@ -21,19 +21,6 @@ const _default: FrontendPlugin<
   },
   {},
   {
-    'api:kubernetes': ExtensionDefinition<{
-      kind: 'api';
-      namespace: undefined;
-      name: undefined;
-      config: {};
-      configInput: {};
-      output: ConfigurableExtensionDataRef<
-        AnyApiFactory,
-        'core.api.factory',
-        {}
-      >;
-      inputs: {};
-    }>;
     'page:kubernetes': ExtensionDefinition<{
       kind: 'page';
       namespace: undefined;
@@ -54,6 +41,19 @@ const _default: FrontendPlugin<
               optional: true;
             }
           >;
+      inputs: {};
+    }>;
+    'api:kubernetes': ExtensionDefinition<{
+      kind: 'api';
+      namespace: undefined;
+      name: undefined;
+      config: {};
+      configInput: {};
+      output: ConfigurableExtensionDataRef<
+        AnyApiFactory,
+        'core.api.factory',
+        {}
+      >;
       inputs: {};
     }>;
     'entity-content:kubernetes/kubernetes': ExtensionDefinition<{

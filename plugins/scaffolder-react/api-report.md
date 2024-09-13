@@ -6,7 +6,7 @@
 /// <reference types="react" />
 
 import { ApiHolder } from '@backstage/core-plugin-api';
-import { ApiRef } from '@backstage/core-plugin-api';
+import { ApiRef } from '@backstage/frontend-plugin-api';
 import { ComponentType } from 'react';
 import { CustomValidator } from '@rjsf/utils';
 import { ElementType } from 'react';
@@ -44,6 +44,7 @@ import { TemplatesType } from '@rjsf/utils';
 import { UIOptionsType } from '@rjsf/utils';
 import { UiSchema } from '@rjsf/utils';
 import { ValidatorType } from '@rjsf/utils';
+import { z } from 'zod';
 
 // @public
 export type Action = {
@@ -100,9 +101,20 @@ export type FieldExtensionComponent<_TReturnValue, _TInputProps> = () => null;
 export interface FieldExtensionComponentProps<
   TFieldReturnValue,
   TUiOptions = {},
-> extends PropsWithChildren<ScaffolderRJSFFieldProps<TFieldReturnValue>> {
+> extends PropsWithChildren<
+    ScaffolderRJSFFieldProps<
+      TFieldReturnValue extends z.ZodType
+        ? z.output<TFieldReturnValue>
+        : TFieldReturnValue
+    >
+  > {
   // (undocumented)
-  uiSchema: FieldExtensionUiSchema<TFieldReturnValue, TUiOptions>;
+  uiSchema: FieldExtensionUiSchema<
+    TFieldReturnValue extends z.ZodType
+      ? z.output<TFieldReturnValue>
+      : TFieldReturnValue,
+    TUiOptions extends z.ZodType ? z.output<TUiOptions> : TUiOptions
+  >;
 }
 
 // @public
@@ -123,6 +135,18 @@ export interface FieldExtensionUiSchema<TFieldReturnValue, TUiOptions>
   extends UiSchema<TFieldReturnValue> {
   // (undocumented)
   'ui:options'?: TUiOptions & UIOptionsType<TFieldReturnValue>;
+}
+
+// @public
+export interface FieldSchema<TReturn, TUiOptions> {
+  // (undocumented)
+  readonly schema: CustomFieldExtensionSchema;
+  // (undocumented)
+  readonly TProps: FieldExtensionComponentProps<TReturn, TUiOptions>;
+  // @deprecated (undocumented)
+  readonly type: FieldExtensionComponentProps<TReturn, TUiOptions>;
+  // @deprecated (undocumented)
+  readonly uiOptionsType: TUiOptions;
 }
 
 // @public
@@ -167,6 +191,15 @@ export type LogEvent = {
   id: string;
   taskId: string;
 };
+
+// @public (undocumented)
+export function makeFieldSchema<
+  TReturnType extends z.ZodType,
+  TUiOptions extends z.ZodType,
+>(options: {
+  output: (zImpl: typeof z) => TReturnType;
+  uiOptions?: (zImpl: typeof z) => TUiOptions;
+}): FieldSchema<z.output<TReturnType>, z.output<TUiOptions>>;
 
 // @public
 export type ReviewStepProps = {

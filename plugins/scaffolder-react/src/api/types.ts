@@ -17,7 +17,6 @@ import { TaskSpec, TaskStep } from '@backstage/plugin-scaffolder-common';
 import { JsonObject, JsonValue, Observable } from '@backstage/types';
 import { JSONSchema7 } from 'json-schema';
 import { TemplateParameterSchema } from '../types';
-import { FormFieldExtensionData } from '../next';
 
 /**
  * The status of each task in a Scaffolder Job
@@ -237,12 +236,4 @@ export interface ScaffolderApi {
     resource: string;
     context?: Record<string, string>;
   }): Promise<{ results: { title: string }[] }>;
-}
-
-/**
- * @public
- */
-export interface ScaffolderFormFieldsApi {
-  getFormFields: () => FormFieldExtensionData[];
-  setFormFields: (formField: FormFieldExtensionData) => void;
 }
