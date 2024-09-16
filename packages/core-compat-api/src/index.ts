@@ -25,3 +25,5 @@ export {
   convertLegacyRouteRefs,
   type ToNewRouteRef,
 } from './convertLegacyRouteRef';
+
+export * from './RouteRefBindings';

@@ -35,6 +35,7 @@ import { ErrorPage } from '@backstage/core-components';
 export const selectedTemplateRouteRef = createRouteRef({
   params: ['namespace', 'templateName'],
 });
+
 export const scaffolderTaskRouteRef = createRouteRef({ params: ['taskId'] });
 export const scaffolderListTaskRouteRef = createRouteRef();
 export const actionsRouteRef = createRouteRef();
@@ -120,6 +121,7 @@ export const scaffolderTaskPage = PageBlueprint.make({
       import('./components/TemplateListPage').then(m => <m.TemplateListPage />),
   },
 });
+
 export const scaffolderListTaskPage = PageBlueprint.make({
   name: 'task-list',
   attachTo: { id: 'page:scaffolder', input: 'routes' },
@@ -130,6 +132,7 @@ export const scaffolderListTaskPage = PageBlueprint.make({
       import('./components/TemplateListPage').then(m => <m.TemplateListPage />),
   },
 });
+
 export const actionsPage = PageBlueprint.make({
   name: 'actions',
   attachTo: { id: 'page:scaffolder', input: 'routes' },
@@ -140,6 +143,7 @@ export const actionsPage = PageBlueprint.make({
       import('./components/TemplateListPage').then(m => <m.TemplateListPage />),
   },
 });
+
 export const editPage = PageBlueprint.make({
   name: 'edit',
   attachTo: { id: 'page:scaffolder', input: 'routes' },

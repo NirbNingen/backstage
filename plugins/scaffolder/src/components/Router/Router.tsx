@@ -58,6 +58,7 @@ import {
 import { TemplateListPage, TemplateWizardPage } from '../../alpha/components';
 import { OngoingTask } from '../OngoingTask';
 import { TemplateEditorPage } from '../../alpha/components/TemplateEditorPage';
+import { RouteRefBindingsProvider } from '@backstage/core-compat-api';
 
 /**
  * The Props for the Scaffolder Router
@@ -131,7 +132,7 @@ export const Router = (props: PropsWithChildren<RouterProps>) => {
   const customLayouts = useCustomLayouts(outlet);
 
   return (
-    <RouteRefCompatProvider
+    <RouteRefBindingsProvider
       bindings={[
         [selectedTemplateRouteRef, newSelectedTemplateRouteRef],
         [scaffolderTaskRouteRef, newScaffolderTaskRouteRef],
@@ -198,6 +199,6 @@ export const Router = (props: PropsWithChildren<RouterProps>) => {
           element={<ErrorPage status="404" statusMessage="Page not found" />}
         />
       </Routes>
-    </RouteRefCompatProvider>
+    </RouteRefBindingsProvider>
   );
 };
